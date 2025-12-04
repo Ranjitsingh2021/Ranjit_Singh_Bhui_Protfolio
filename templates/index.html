@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ personal_info.name }} - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <nav class="navbar">
+        <div class="logo">{{ personal_info.name }}<span class="accent">.</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <p class="greeting">Hello, I'm</p>
+            <h1 class="name">{{ personal_info.name }}</h1>
+            <h2 class="title">{{ personal_info.title }}</h2>
+            <p class="description">Transforming business processes into scalable, efficient, and user-friendly
+                automation tools.</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn primary">Get in Touch</a>
+                <a href="#projects" class="btn secondary">View Work</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="profile-img-container">
+                <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Ranjit Singh Bhui"
+                    class="profile-img">
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>{{ personal_info.summary }}</p>
+                    <div class="personal-details">
+                        <div class="detail-item"><i class="fas fa-map-marker-alt"></i> {{ personal_info.location }}
+                        </div>
+                        <div class="detail-item"><i class="fas fa-envelope"></i> {{ personal_info.email }}</div>
+                        <div class="detail-item"><i class="fas fa-phone"></i> {{ personal_info.phone }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Technical Expertise</h2>
+            <div class="skills-grid">
+                {% for skill in skills %}
+                <div class="skill-card">
+                    <i class="fas fa-code"></i>
+                    <h3>{{ skill }}</h3>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-grid">
+                {% for job in experience %}
+                <div class="experience-card">
+                    <div class="exp-header">
+                        <span class="exp-date"><i class="fas fa-calendar"></i> {{ job.duration }}</span>
+                        <span class="exp-location"><i class="fas fa-map-pin"></i> {{ job.location }}</span>
+                    </div>
+                    <h3>{{ job.role }}</h3>
+                    <h4>{{ job.company }}</h4>
+                    <ul>
+                        {% for detail in job.details %}
+                        <li>{{ detail }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                {% for project in projects %}
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="fas fa-project-diagram"></i>
+                        <div class="project-links">
+                            {% if project.link != '#' %}
+                            <a href="{{ project.link }}" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <h3>{{ project.title }}</h3>
+                    <p class="tech-stack">{{ project.tech }}</p>
+                    <p class="project-desc">{{ project.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="section">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-grid">
+                {% for edu in education %}
+                <div class="edu-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>{{ edu.degree }}</h3>
+                    <p>{{ edu.institution }}</p>
+                    <span class="year">{{ edu.year }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section footer-section">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            <div class="contact-content">
+                <p>Interested in automating your business processes? Let's talk.</p>
+                <a href="mailto:{{ personal_info.email }}" class="btn primary">Say Hello</a>
+                <div class="social-links">
+                    <a href="{{ personal_info.linkedin }}" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:{{ personal_info.email }}"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <footer>
+                <p>&copy; 2025 {{ personal_info.name }}. All rights reserved.</p>
+            </footer>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
