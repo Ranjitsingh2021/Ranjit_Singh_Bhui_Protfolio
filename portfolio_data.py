@@ -2,7 +2,7 @@
 data = {
     "personal_info": {
         "name": "Ranjit Singh Bhui",
-        "title": "Automation Specialist | RPA Lead",
+        "title": "Automations & Generative AI, AI Agents, Agentic AI",
         "email": "Ranjitsingh.bhui@yahoo.com",
         "phone": "+91-7977478006",
         "location": "Mumbai, India",
